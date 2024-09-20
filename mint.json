@@ -34,7 +34,7 @@
   ],
   "anchors": [
     {
-      "name": "Community",
+      "name": "Join Discord",
       "icon": "discord",
       "url": "https://mintlify.com/community"
     },
@@ -49,9 +49,10 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "build",
-        "manage",
-        "deploy"
+        "get-started/setup",
+        "get-started/build",
+        "get-started/manage",
+        "get-started/deploy"
       ]
     },
     {

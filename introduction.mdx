@@ -3,75 +3,112 @@ title: Introduction
 description: "Welcome to the home of FlowScale Documentation!\n > ComfyUI is a powerful tool that can be used to build complex AI workflows and pipelines. <strong>FlowScale allows you to harness that power to it’s fullest!</strong> 🚀"
 icon: "house"
 ---
-
-<img
-  className="block"
-  src="/images/introduction/flowscale-hero.png"
-  alt="Hero Dark"
-/>
+<Frame>
+  <img
+    className="block"
+    src="/images/introduction/hero.png"
+    alt="Hero Dark"
+  />
+</Frame>
 
 FlowScale is a platform that helps you to (collaboratively) build, manage, and deploy your ComfyUI workflows, as scalable APIs or sharable Gradio UIs. <br/> <br/>
 This documentation will help you get started with FlowScale. Read the below tutorials and references so that you can get the most out of FlowScale.
 
-## Getting Started with FlowScale
+# Getting Started with FlowScale
 
 There are many things that you can do with FlowScale. Here are some of the most common tasks that you might want to do:
 
 <CardGroup cols={2}>
   <Card
+    title="Setup Workspace"
+    icon="computer"
+    href="/get-started/build"
+  >
+    Setup your Organization, add team members, and create your first Project
+  </Card>
+  <Card
     title="Build a ComfyUI Workflow"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
+    icon="plus"
+    href="/get-started/build"
   >
-    Get your docs set up locally for easy development
+    Run ComfyUI on Cloud GPUs and build your own AI workflows
   </Card>
   <Card
-    title="Collaborate with your team"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
+    title="Manage your Workflows"
+    icon="table-columns"
+    href="/get-started/manage"
   >
-    Get your docs set up locally for easy development
+    Collaborate with your team to build, manage, and version your workflows.
   </Card>
   <Card
-    title="Deploy ComfyUI Workflows"
-    icon="image"
-    href="https://mintlify.com/docs/development"
+    title="Deploy your Workflows"
+    icon="rocket"
+    href="/get-started/deploy"
   >
-    Preview your changes before you push to make sure they're perfect
+    Deploy your ComfyUI workflows as scalable APIs or shareable AI Apps (Gradio UIs)
   </Card>
 </CardGroup>
 
-{/* ## Make it yours
+{/* # Core Concepts
 
-Update your docs to your brand and add valuable content for the best user conversion.
+To get the maximum value out of FlowScale, you need to understand the following core concepts. 
+These concepts are the building blocks of FlowScale, and you will be using them throughout your journey with FlowScale.
 
-<CardGroup cols={2}>
+<CardGroup cols={3}>
   <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
+    title="Workflows"
+    icon="arrows-turn-to-dots"
+    href="/build"
   >
-    Customize your docs to your company's colors and brands
+    ComfyUI Workflows that you can deploy as serverless APIs
   </Card>
   <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    title="Workflow Editor"
+    icon="pen-to-square"
+    href="/manage"
   >
-    Automatically generate endpoints from an OpenAPI spec
+    Online Editor to build, edit and run your workflows on Cloud GPUs
   </Card>
   <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
+    title="Models"
+    icon="file"
+    href="/deploy"
   >
-    Build interactive features and designs to guide your users
+    AI Models that you can use in your workflows, for inferencing and building AI pipelines
   </Card>
   <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
+    title="Nodes"
+    icon="puzzle-piece"
+    href="/deploy"
   >
-    Check out our showcase of our favorite documentation
+    Install & Manage ComfyUI custom nodes that you use in your workflows
   </Card>
-</CardGroup> */}
+  <Card
+    title="Deployments"
+    icon="rocket"
+    href="/deploy"
+  >
+    Manage, and monitor your deployed workflows as scalable APIs or shareable AI Apps
+  </Card>
+  <Card
+    title="Runs"
+    icon="circle-play"
+    href="/deploy"
+  >
+    Monitor outputs generated through the deployed APIs or shareable AI Apps
+  </Card>
+</CardGroup>
+
+## Workflows
+When you open a Project, in FlowScale, you will find yourself in a view like below. This is the Editor Tab.
+
+<Frame caption="Editor Tab">
+  <img
+    className="block rounded-lg"
+    src="/images/introduction/editor.png"
+    alt="Editor"
+  />
+</Frame>
+
+Workflows are the core building blocks of FlowScale. A workflow in FlowScale is nothing but a json file that you get when you save a workflow on ComfyUI. */}
+
