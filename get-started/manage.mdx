@@ -4,96 +4,134 @@ description: 'Learn how to preview changes locally'
 icon: 'table-columns'
 ---
 
-<Info>
-  **Prerequisite** You should have installed Node.js (version 18.10.0 or
-  higher).
-</Info>
+In FlowScale, managing workflows effectively is crucial for collaborating with team members, tracking changes, and maintaining different versions. This guide covers how to collaborate on workflows, manage workflow versions, handle GitHub integration, and manage AI models and custom nodes.
 
-Step 1. Install Mintlify on your OS:
+---
 
-<CodeGroup>
+### **Table of Contents**
+1. [Collaboration on Workflows](#collaboration-on-workflows)
+2. [Workflow Versioning](#workflow-versioning)
+3. [GitHub Integration](#github-integration)
+4. [Model and Node Management](#model-and-node-management)
 
-```bash npm
-npm i -g mintlify
-```
+---
 
-```bash yarn
-yarn global add mintlify
-```
+## 1. **Collaboration on Workflows**
 
-</CodeGroup>
+FlowScale allows multiple team members to work on the same workflows. While real-time editing isn’t available yet, FlowScale provides efficient ways to collaborate and manage changes.
 
-Step 2. Go to the docs are located (where you can find `mint.json`) and run the following command:
+### **Adding Collaborators to a Project**
+To collaborate on a workflow, you need to add team members to your project as **collaborators**:
+1. **Go to Project Settings**:  
+   In the left sidebar, click on the **Project Collaborators** tab within the settings.
+2. **Invite Collaborators**:  
+   Click on **Add Collaborator** and enter the collaborator's **username** in the dialog box. The team member will receive an invitation through GitHub, which they need to accept.  
+   _**Screenshot Suggestion**: Add an image showing the Project Collaborators tab and the “Add Collaborator” button._
 
-```bash
-mintlify dev
-```
+3. **GitHub Invitation**:  
+   Once the collaborator accepts the GitHub invitation, they will gain access to the project. The workflows are stored in a GitHub repository, and collaborators are granted access to the same repository.
+   
+4. **Collaborating on Workflows**:  
+   After adding collaborators, multiple team members can work on the same ComfyUI instance. However, **real-time updates** and shared editing are not yet available. Team members should avoid editing the same workflow simultaneously to prevent conflicts.
 
-The documentation website is now available at `http://localhost:3000`.
+   _**Important**_: When a team member saves changes to a workflow, others must refresh the workflow list on the left side of the editor to see the updates. This ensures that everyone is working on the most current version.
 
-### Custom Ports
+   _**Screenshot Suggestion**: Show the workflow editor with instructions on how to refresh the workflows list._
 
-Mintlify uses port 3000 by default. You can use the `--port` flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
+### **Permissions for Collaborators**
+- **Owner**: The project owner has full control and can add/remove collaborators. They are also responsible for managing project settings.
+- **Collaborators**: Can make all changes to workflows (e.g., edit workflows, add/remove nodes, manage models) but cannot add or remove other collaborators.
 
-```bash
-mintlify dev --port 3333
-```
+---
 
-You will see an error like this if you try to run Mintlify in a port that's already taken:
+## 2. **Workflow Versioning**
 
-```md
-Error: listen EADDRINUSE: address already in use :::3000
-```
+Tracking changes in workflows is crucial for ensuring that different versions are properly managed. In FlowScale, every workflow save is versioned via GitHub commits.
 
-## Mintlify Versions
+### **Saving Workflow Versions**
+1. **Make Changes**:  
+   Open a workflow and make the necessary changes. When you’re done, click **Save Changes** on the action bar.
+   
+   _**Screenshot Suggestion**: Highlight the "Save Changes" button on the action bar._
 
-Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
+2. **Provide a Commit Message**:  
+   A dialog box will appear prompting you to enter a **commit message**. This message describes the changes made to the workflow.
+   
+   _**Screenshot Suggestion**: Show the commit message dialog box._
 
-<CodeGroup>
+3. **Version Creation**:  
+   Each time you save, the workflow is saved as a new **version**. These versions are tied to GitHub commits, allowing you to track changes over time.
 
-```bash npm
-npm i -g mintlify@latest
-```
+### **Viewing and Managing Workflow Versions**
+1. **Change History**:  
+   To view the version history of a workflow:
+   - Open the **Workflows** tab in the left sidebar.
+   - Hover over the workflow and click the **triple dot menu**.
+   - Select **Change History** to see all saved versions and changes.
 
-```bash yarn
-yarn global upgrade mintlify
-```
+   _**Screenshot Suggestion**: Show the Change History option and the version history list._
 
-</CodeGroup>
+2. **Viewing Commit Details**:  
+   To see detailed changes, click the version you want to inspect. This will open the commit on GitHub, where you can view the workflow’s JSON file changes. 
+   
+   _**Tip**: Focus on the **API JSON file** in GitHub, as it tracks meaningful workflow changes without recording positional adjustments like node placement._
 
-## Deployment
+   _**Screenshot Suggestion**: Show a GitHub commit page for a workflow with JSON changes highlighted._
 
-<Tip>
-  Unlimited editors available under the [Startup
-  Plan](https://mintlify.com/pricing)
-</Tip>
+### **Restoring Previous Versions**
+At this time, FlowScale does not support the ability to **restore** previous versions directly in the UI. However, you can view older commits and manually recreate a workflow based on the version history.
 
-You should see the following if the deploy successfully went through:
+---
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+## 3. **GitHub Integration**
 
-## Troubleshooting
+FlowScale deeply integrates with GitHub to securely manage and version workflows. Each project in FlowScale corresponds to a GitHub repository, ensuring that users maintain full control of their workflow data.
 
-Here's how to solve some common problems when working with the CLI.
+### **How GitHub Integration Works**
+1. **Project Repositories**:  
+   When you create a project in FlowScale, a corresponding **GitHub repository** is created under your account. This repository holds all your workflow data and ensures that you have complete control over your intellectual property.
 
-<AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
-  </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
+   _**Screenshot Suggestion**: Show the creation of a GitHub repository during the FlowScale project setup._
 
-Repeat step 3.
+2. **Committing Changes**:  
+   Every time you **save** a workflow, FlowScale automatically pushes the changes as a **GitHub commit**. This keeps the repository updated without any manual effort.
 
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
+   _**Screenshot Suggestion**: Highlight the automatic commit process that occurs when saving a workflow._
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+### **How GitHub Commits Are Tied to Workflow Changes**
+Each commit represents a version of the workflow. When you save a workflow, the changes are automatically committed to GitHub, ensuring traceability. Users can view commit details in the **Change History** section or directly on GitHub.
+
+---
+
+## 4. **Model and Node Management**
+
+Managing AI models and nodes is essential for ensuring that your workflows run smoothly, regardless of the version. In FlowScale, models and nodes are managed separately from workflow versions.
+
+### **Managing AI Models and Nodes Across Workflows**
+- **AI Models** and **Custom Nodes** are managed independently of workflows. This means that changes to models or nodes do not directly affect individual workflow versions.
+- The **Models** and **Nodes** tabs on the left sidebar allow users to manage models and nodes for all workflows within the project.
+
+   _**Screenshot Suggestion**: Show the Models and Nodes tabs with a few models/nodes listed._
+
+### **Shared Library of Nodes and Models**
+- **Models**:  
+   FlowScale provides a shared library for **public models** (available to all users) and **private models** (uploaded by the user). These models are accessible across all projects, not limited to a specific one.
+
+- **Nodes**:  
+   While there is no shared node library across multiple projects, the models in the **Models tab** can be accessed across different projects, serving as a central repository.
+
+   _**Screenshot Suggestion**: Show an image of the Models tab with public and private models available._
+
+### **Updating Nodes Without Affecting Workflows**
+- Users must manually ensure that any **custom nodes** required for workflows are not deleted or changed without consideration. Deleting a node may cause existing workflows to fail.
+- If you delete a node and suspect it may affect a workflow, re-import the workflow to trigger an analysis of required nodes. This process will detect and reinstall any missing nodes.
+
+   _**Tip**: Keep the number of installed nodes below 35-40 to ensure the best performance. Having too many nodes can slow down your machine’s cold start time._
+
+   _**Screenshot Suggestion**: Show a warning about managing node limits for optimal performance._
+
+---
+
+### **Conclusion**
+
+Managing workflows in FlowScale is a robust process that allows collaboration, detailed versioning, and secure GitHub integration. By following these best practices, teams can efficiently build, manage, and deploy complex AI workflows without compromising performance or workflow integrity.

@@ -4,56 +4,178 @@ description: 'Run ComfyUI on Cloud GPUs and build your own AI workflows'
 icon: 'plus'
 ---
 
-## Step 1: Create Project
+FlowScale allows users to build, customize, and manage powerful AI workflows using ComfyUI on cloud GPUs. In this guide, we will cover how to start ComfyUI on FlowScale, build and import workflows, manage cloud GPU resources, and handle AI models.
 
-1. After signing up, you will land on the Projects page in FlowScale, and that will look like this, [Blank image of flowscale repos]
-2. Create a new Project, by clicking on “Create ComfyUI Project” button. And, once you do that a dialog box will pop up asking you for relevant information to create a project.
-*Note: This project is a actually a GitHub repository that you can collaborate with your peers or teams with.* 
-[Image of Comfy Create project]
+---
 
-## Step 2: Start ComfyUI Editor
+### **Table of Contents**
+1. [Accessing ComfyUI](#accessing-comfyui)
+2. [Building Workflows](#building-workflows)
+3. [Cloud GPU Usage](#cloud-gpu-usage)
+4. [Managing Private and Public Models](#managing-private-and-public-models)
 
-1. Once you have created and entered a project, you will see the “Editor” page. [Screenshot of the Editor]
-2. To start ComfyUI, click on “Start ComfyUI” button [Image showing start ComfyUI]
-3. To see the logs, click on the logs bar at the bottom of the page and once it’s expanded, you can see all the System logs showcasing logs of ComfyUI and the machine it is running on.
-4. Once your ComfyUI has started you will see a screen like this, [Image showing editor page with comfyui started]
+---
 
-## Step 3: Create a new workflow
+## 1. **Accessing ComfyUI**
 
-1. Once ComfyUI is started, create a new workflow by clicking on `+` button > “Create New Workflow” option, in the Workflows Sidebar. [Show the dropdown]
-2. Once you click on that button, it will load a new unsaved workflow in the ComfyUI Editor. [Show untitled workflow]
+After creating your first project in FlowScale, you can easily access and start ComfyUI to build your AI workflows.
 
-## Step 4: Install Models
+### **Steps to Start ComfyUI on FlowScale**
+1. **Sign in to FlowScale** and open the **Projects** page.
+2. **Select your project**. Once you click on a project, you’ll land on the **workflow editor screen**.
+   - At the top, you’ll see the **project name** and **organization name**.
+   - The **left sidebar** has three main tabs:  
+     - **Workflows**: Manage and organize your workflows within folders.
+     - **Models**: Access public or private AI models for your workflows.
+     - **Nodes**: Manage custom ComfyUI nodes required for building workflows.
+     
+   _**Screenshot Suggestion**: Include an annotated image of the workflow editor screen, highlighting the project name, organization, and sidebar tabs._
 
-1. Explain the private and public models
-2. Explain
+3. On the right side of the screen, there’s a **“Start ComfyUI”** button.  
+   - Click this button to launch ComfyUI.  
+   - Once clicked, an action bar will appear at the bottom, displaying a message: **“ComfyUI Starting, please wait.”**
+   - A **loader** will indicate the startup process, and logs will be displayed at the bottom to monitor system activities.
+   
+   _**Screenshot Suggestion**: Show the location of the "Start ComfyUI" button and the action bar with the startup message._
 
-## Step 5: Custom Nodes
+4. After the instance is fully set up, the **ComfyUI interface** will appear, ready for workflow building.
 
-## Step 6: Run your workflow
+### **Running ComfyUI on Cloud GPUs**
+By default, ComfyUI starts on a **T4 GPU**, but you can change the GPU type in your project’s settings.
+1. **Open Project Settings**:  
+   Navigate to the **Project Settings** tab and go to **GPU Settings**.
+   
+2. **Select GPU Type**:  
+   - You’ll see a **GPU Type dropdown**. By default, the **T4** is selected.
+   - Available options include:  
+     - T4 (default)
+     - L4
+     - A100 40 GB
+     - A100 80 GB
+     - H100
+     - A10G
 
-## Step 7: Save Changes
+3. **Switch GPU**:  
+   Select a different GPU type, **save changes**, return to the editor, and click the **“Stop”** button to stop the current ComfyUI instance.
+   - Click **“Start ComfyUI”** again to launch the new instance with the selected GPU.
 
-## Troubleshooting
+   _**Screenshot Suggestion**: Add an image of the "GPU Settings" screen with the dropdown showing available GPUs._
 
-Here's how to solve some common problems when working with the CLI.
+---
 
-<AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
-  </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
+## 2. **Building Workflows**
 
-Repeat step 3.
+FlowScale allows users to build workflows either from scratch or by importing existing workflows. This section covers both options in detail.
 
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
+### **Step-by-Step Instructions for Building a New Workflow from Scratch**
+1. **Launch ComfyUI**:  
+   After starting ComfyUI, a **default workflow** is automatically loaded into the editor.
+   - The workflow is labeled **“Untitled Workflow”**, and a star icon indicates that the workflow is unsaved.
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+   _**Screenshot Suggestion**: Show the default ComfyUI workflow interface with an annotation of the “Untitled Workflow” and the star icon._
+
+2. **Editing the Workflow**:  
+   - Make any changes to the default workflow.  
+   - When changes are made, the **“Save Changes”** button on the action bar will become active.
+
+3. **Add AI Models**:  
+   Switch to the **Models** tab on the left sidebar to select AI models. You can choose from FlowScale’s **public models** or upload **private models**.
+   - To access public models, simply select **Public Models** from the dropdown.
+   - To add private models, follow the steps in the [Private and Public Models](#managing-private-and-public-models) section below.
+
+   _**Screenshot Suggestion**: Add an image of the Models tab showing the dropdown for public and private models._
+
+4. **Add Custom Nodes**:  
+   Use the **Nodes** tab in the sidebar to add custom nodes required for the workflow.
+   - Click the **“+”** button to add new nodes.  
+   - You can search for popular custom nodes by name, and FlowScale will automatically pull the required GitHub repository for installation.
+
+   _**Screenshot Suggestion**: Show the Nodes tab with the “Add Custom Node” option._
+
+5. **Save Your Workflow**:  
+   Once your workflow is complete, click **“Save Changes”** on the action bar. A popup will appear asking for:  
+   - **Workflow Name**  
+   - **Select Path** (Choose or create a folder in the workflow tab to save the workflow)  
+   - **Description** of the workflow
+
+   After saving, two files will be created in the selected folder:  
+   - The **main workflow file** (for ComfyUI).  
+   - An **API JSON file**, which will be used for future API deployments.
+
+   _**Screenshot Suggestion**: Add an image of the “Save Changes” popup, showing the fields for workflow name, folder, and description._
+
+### **Importing Existing ComfyUI Workflows into FlowScale**
+1. **Import a Workflow**:  
+   In the **Workflows** tab, click the **“+”** button and select **“Import Workflow”**.  
+   - A dialog box will open, prompting you to upload a **workflow file (JSON)** from your local machine.
+   
+   _**Screenshot Suggestion**: Show the “Import Workflow” button and the upload dialog box._
+
+2. **Analyze and Install Nodes**:  
+   After uploading the workflow, FlowScale will automatically analyze it. This process identifies:  
+   - **Custom nodes** that need to be installed.  
+   - **Conflicting nodes** (if there are duplicate or overlapping nodes).  
+   
+   Select the nodes you want to install, then click **Confirm**.
+
+   _**Screenshot Suggestion**: Include a screenshot of the Analyze tab showing custom and conflicting nodes._
+
+3. **Install Nodes**:  
+   To ensure the nodes from the imported workflow are fully installed, you can:
+   - Shut down the current ComfyUI instance, then **restart ComfyUI**. This will automatically install all nodes.
+   - Alternatively, click the **three-dot menu** on individual nodes in the **Nodes tab** and select **Reinstall**.
+
+---
+
+## 3. **Cloud GPU Usage**
+
+FlowScale supports running ComfyUI workflows on cloud GPUs. Managing your GPU usage effectively ensures cost-efficiency and optimal performance.
+
+### **Checking GPU Usage**
+1. **Monitoring GPU Activity**:  
+   At the **top right of the screen**, there’s a **Credits** indicator.  
+   - A **green dot** next to the credits indicates that the GPU is currently in use.  
+   - A **gray dot** means the GPU is idle, and you are not being charged for usage.
+
+   _**Screenshot Suggestion**: Highlight the Credits section showing the green and gray status dots._
+
+2. **Viewing GPU Type in Use**:  
+   The GPU type being used (e.g., T4) is displayed in the **action bar** at the bottom of the screen. This helps you track which GPU is being charged.
+
+   _**Screenshot Suggestion**: Add an image of the action bar showing the GPU type in use._
+
+### **Limits and Usage Caps**
+- Currently, there are **no usage caps or limits** on GPU usage for specific plans.
+- However, be mindful of the GPU type you select as higher-end GPUs incur greater costs.
+
+---
+
+## 4. **Managing Private and Public Models**
+
+FlowScale allows users to work with both public and private AI models. Public models are available by default, while private models can be added manually.
+
+### **Adding Public Models**
+1. Go to the **Models** tab on the left sidebar.
+2. Select **Public Models** from the dropdown.  
+   - These models are supported by FlowScale out of the box and can be used in any workflow.
+
+   _**Screenshot Suggestion**: Show the Models tab with the dropdown showing Public Models._
+
+### **Adding Private Models**
+1. To add a private model, switch to **Private Models** in the dropdown.
+2. Click the **“+”** button to add a new folder for organizing your private models (e.g., “Checkpoints” or “ControlNet”).
+3. Inside the folder, click the **three-dot menu** and select **Upload** to add a new model file.
+4. You can search
+
+ for models using the **search bar** provided, or directly upload a model from your machine.
+   - If you are uploading a model from **CivitAI**, you will need to enter your **CivitAI API key** to complete the download.
+
+   _**Screenshot Suggestion**: Add images showing how to create folders, upload models, and enter API keys._
+
+5. Once uploaded, click **Refresh** on the action bar to see the new model in ComfyUI.
+
+---
+
+### **Conclusion**
+
+Building workflows in FlowScale is a seamless experience, allowing users to leverage cloud GPUs, manage models and nodes, and deploy AI workflows efficiently. Whether starting from scratch or importing existing workflows, FlowScale ensures flexibility and control at every step.
