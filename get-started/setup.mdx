@@ -95,12 +95,12 @@ After creating your organization, you can invite team members to collaborate on 
         />
     </Frame>
 
-2. **Invite Members**:  
+2. **Add Members**:  
    Once you've purchased additional seats, return to the **Manage Members** tab:  
    - Click **Add Member**.  
    - Enter the **username** of the team member you wish to invite.  
      - The username is located in the top-right corner of the user’s FlowScale account, under their profile.
-   - Click **Invite Member**.  
+   - Click **Add Member**.  
 
     <Frame caption="Organization Settings -> Manage Members -> Add Member" style={{marginBottom: '10px'}}>
         <img
@@ -138,7 +138,7 @@ Once your organization is set up and team members are added, you can begin creat
 1. **Access the Projects Page**:  
    From the dashboard, navigate to the **Projects** section. Here, you’ll see two options:  
    - **Create ComfyUI Project**: For starting a new project from scratch.  
-   - **Import Existing Project**: For importing a project that already exists in GitHub.
+   - **Import Existing Project**: For importing a project that already exists in GitHub. (This option is useful to import someone else's project or a project you’ve worked on previously.)
 
     <Frame caption="Get Started with Projects" style={{marginBottom: '10px'}}>
         <img
@@ -170,8 +170,8 @@ Once your organization is set up and team members are added, you can begin creat
     </Frame>
 
 ### **What Happens Behind the Scenes**:
-- When you create a project, FlowScale generates a **GitHub repository** in your account. This repository stores all your workflow configurations, custom nodes, and models.  
-- This approach ensures **full control and ownership** of your data. You can manage your workflows directly through GitHub, maintaining complete transparency and security.
+- When you create a project, FlowScale generates a **GitHub repository** in your account. This repository stores all your workflows, workflow configurations, and custom nodes list.  
+- This approach ensures **full control and ownership** of your data. You can own your workflows, without us having access to them, through GitHub, maintaining complete transparency and security.
 
 ---
 
@@ -234,10 +234,10 @@ After creating a project, you can add collaborators to work on it with you. Here
 FlowScale relies heavily on GitHub for storing and managing workflow data. Here’s a summary of how the integration works:
 
 1. **Data Storage**:  
-   Every project you create in FlowScale is backed by a GitHub repository. This ensures that your workflow data, models, and custom nodes are securely stored and version-controlled.
+   Every project you create in FlowScale is backed by a GitHub repository. This ensures that your workflow data, and custom nodes are securely stored.
 
 2. **Version Control**:  
-   GitHub’s versioning system allows you to manage multiple versions of your workflows. You can create branches for different features or rollback to previous versions as needed.
+   GitHub’s versioning system allows you to manage multiple versions of your workflows.
 
 3. **Collaborator Access**:  
    When collaborators are added to a project in FlowScale, they are also added to the corresponding GitHub repository, ensuring they have access to all project data.
