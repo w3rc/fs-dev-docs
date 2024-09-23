@@ -9,11 +9,11 @@ This guide will walk you through the essential steps for setting up your workspa
 ---
 
 ### **Table of Contents**
-1. [Organization Setup](#organization-setup)
-2. [Team Management](#team-management)
-3. [Project Creation](#project-creation)
-4. [Collaborator Management](#collaborator-management)
-5. [GitHub Integration](#github-integration)
+1. [Organization Setup](#1-organization-setup)
+2. [Team Management](#2-team-management)
+3. [Project Creation](#3-project-creation)
+4. [Collaborator Management](#4-collaborator-management)
+5. [GitHub Integration](#5-github-integration)
 
 ---
 
@@ -23,21 +23,31 @@ Setting up your organization is the first step after signing up for FlowScale. T
 
 ### **Steps to Create an Organization**
 1. **Sign Up**:  
-   Go to [hub.flowscale.ai](https://hub.flowscale.ai) and click the **"Get Started"** button. You will be redirected to a **GitHub login page**, where you must sign up or sign in using your GitHub account.  
+   Go to [flowscale.ai](https://flowscale.ai) and click the **"Get Started"** button. You will be redirected to a **GitHub login page**, where you must sign up or sign in using your GitHub account.  
    - **Prerequisite**: You must have an existing GitHub account to sign up for FlowScale.
    - **GitHub Permissions**: When signing in, you will be prompted to grant permissions so that FlowScale can integrate with your GitHub account. This allows FlowScale to manage repositories and workflow data seamlessly.
-   
-   ![GitHub Login](#)  
-   _**Screenshot suggestion:** Add a screenshot of the GitHub sign-in page for FlowScale._
 
 2. **Choose a Subscription Plan**:  
    After signing in, you'll be redirected to the **Pricing Page** where you can choose the **Pro Plan** ($50 per user/month). Fill out your billing information and complete the purchase.
 
+    <Frame caption="Select a Subscription Plan" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/buy-plan.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+
 3. **Default Organization Creation**:  
    Once your subscription is confirmed, FlowScale automatically creates a **default organization** with your name. This organization will appear in the top-right dropdown of your workspace.
 
-   ![Organization Setup](#)  
-   _**Screenshot suggestion:** Add a screenshot of the organization dropdown showing the default organization._
+    <Frame caption="Default Organization" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/default-org.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 ### **Managing Your Organization**
 1. **Accessing Organization Settings**:  
@@ -52,8 +62,13 @@ Setting up your organization is the first step after signing up for FlowScale. T
    - **Rename your organization** and provide a **description**.  
    - Save changes to reflect the new settings across your account.
 
-   ![Organization General Settings](#)  
-   _**Screenshot suggestion:** Include a screenshot of the "General" settings tab._
+    <Frame caption="Organization Settings -> General Tab" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/org-general-settings.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 ### **Managing Multiple Organizations**
 - A user can be part of multiple organizations. As a **freelancer or collaborator**, you can be invited to other organizations by their owners.
@@ -72,8 +87,13 @@ After creating your organization, you can invite team members to collaborate on 
    - Click on **Edit Seats**.  
    - Use the input box to increase the number of seats. This will dynamically display the total cost based on the number of additional members.
 
-   ![Edit Seats](#)  
-   _**Screenshot suggestion:** Include an image of the "Edit Seats" dialog box with the pricing displayed._
+    <Frame caption="Organization Settings -> Billing & Plans -> Edit Seats" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/org-seats.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 2. **Invite Members**:  
    Once you've purchased additional seats, return to the **Manage Members** tab:  
@@ -82,8 +102,27 @@ After creating your organization, you can invite team members to collaborate on 
      - The username is located in the top-right corner of the user’s FlowScale account, under their profile.
    - Click **Invite Member**.  
 
-   ![Add Members](#)  
-   _**Screenshot suggestion:** Add a screenshot showing the "Add Member" button and the input field for the username._
+    <Frame caption="Organization Settings -> Manage Members -> Add Member" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/org-add-member.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+    <Frame caption="Provide Member's GitHub username" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/org-add-member-modal.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+    <Frame caption="Member successfully added!" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/org-added-member.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 ### **Roles and Permissions**
 - **Owner**: Has full administrative control over the organization. Can invite/remove team members, edit billing, and create projects.
@@ -101,8 +140,13 @@ Once your organization is set up and team members are added, you can begin creat
    - **Create ComfyUI Project**: For starting a new project from scratch.  
    - **Import Existing Project**: For importing a project that already exists in GitHub.
 
-   ![Create Project](#)  
-   _**Screenshot suggestion:** Add an image of the "Create ComfyUI Project" and "Import Existing Project" buttons._
+    <Frame caption="Get Started with Projects" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/empty-org.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 2. **Create a New ComfyUI Project**:
    - Click **Create ComfyUI Project**.
@@ -110,8 +154,20 @@ Once your organization is set up and team members are added, you can begin creat
      - Note: **No spaces** are allowed in project names. Use underscores (_) or hyphens (-) instead.
    - Click **Create**. This action automatically creates a **GitHub repository** to store your workflow data.
 
-   ![New Project Setup](#)  
-   _**Screenshot suggestion:** Show the project creation popup with fields for naming and options._
+   <Frame caption="Create a Project" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/create-project-modal.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+   <Frame caption="Project successfully created!" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/new-project.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 ### **What Happens Behind the Scenes**:
 - When you create a project, FlowScale generates a **GitHub repository** in your account. This repository stores all your workflow configurations, custom nodes, and models.  
@@ -127,20 +183,49 @@ After creating a project, you can add collaborators to work on it with you. Here
 1. **Open Project Settings**:  
    In the project dashboard, click on **Project Settings** in the left-hand menu. You’ll see several tabs, including **Project Collaborators**.
    
-   ![Project Settings](#)  
-   _**Screenshot suggestion:** Include a screenshot of the Project Settings page with tabs for "Collaborators" and other settings._
+   <Frame caption="Project Page -> Settings" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/collab-1.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 2. **Add Collaborators**:  
    Under **Project Collaborators**, click **Add Collaborator**. Enter the username of the team member you want to add and click **Invite**.
 
-   ![Add Collaborators](#)  
-   _**Screenshot suggestion:** Show the "Add Collaborator" button and input fields for entering usernames._
+   <Frame caption="Project Settings -> Add Collaborators" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/collab-2.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+    <Frame caption="Project Settings -> Add Collaborators" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/collab-3.png"
+            alt="Hero Dark"
+        />
+    </Frame>
+    <Frame caption="Project Settings -> Add Collaborators" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/collab-4.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 3. **GitHub Invitation**:  
    Once the collaborator is invited, they will receive an email invitation from **GitHub** to access the project’s repository. The collaborator must **accept the GitHub invitation** to gain full access to the project within FlowScale.
 
-   ![GitHub Invitation](#)  
-   _**Screenshot suggestion:** Provide an example of a GitHub invitation email for clarity._
+   <Frame caption="GitHub Collaborator Invitation" style={{marginBottom: '10px'}}>
+        <img
+            className="block"
+            src="/images/setup/collab-invite.png"
+            alt="Hero Dark"
+        />
+    </Frame>
 
 ---
 
@@ -162,10 +247,3 @@ FlowScale relies heavily on GitHub for storing and managing workflow data. Here�
 ### **Conclusion**
 
 Setting up your workspace in FlowScale is quick and intuitive. Once your organization is configured and your team members are invited, you're ready to dive into project creation and workflow development. With seamless GitHub integration, FlowScale ensures your data is secure, and you retain full control over your AI solutions.
-
----
-
-### **Additional Resources**
-- [Managing Seats and Billing](#)  
-- [GitHub Integration and Troubleshooting](#)  
-- [Workflow Collaboration](#)
