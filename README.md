@@ -1,6 +1,6 @@
 # Mintlify Starter Kit
 
-Version: 0.0.5
+Version: 0.0.6
 
 Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
 
