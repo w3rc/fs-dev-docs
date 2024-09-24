@@ -9,11 +9,11 @@ FlowScale allows you to deploy your ComfyUI workflows as scalable APIs or sharea
 ---
 
 ### **Table of Contents**
-1. [Preparing Workflows for Deployment](#preparing-workflows-for-deployment)
-2. [API Deployment](#api-deployment)
-3. [Gradio UI Deployment](#gradio-ui-deployment)
-4. [Scaling and Performance](#scaling-and-performance)
-5. [Post-deployment Monitoring](#post-deployment-monitoring)
+1. [Preparing Workflows for Deployment](#1-preparing-workflows-for-deployment)
+2. [API Deployment](#2-api-deployment)
+3. [Gradio UI Deployment](#3-gradio-ui-deployment)
+4. [Scaling and Performance](#4-scaling-and-performance)
+5. [Post-deployment Monitoring](#5-post-deployment-monitoring)
 
 ---
 
@@ -25,25 +25,49 @@ Before deploying a workflow as an API or Gradio UI, you need to configure the wo
 1. **Open the Workflow**:  
    If you are deploying an existing workflow, you must first **import** it and run it successfully on the ComfyUI instance. Ensure that all models and custom nodes are set up correctly. If you are building a workflow from scratch, make sure you’ve saved it successfully.
 
-   _**Screenshot Suggestion**: Show the ComfyUI editor with an open workflow, ready for deployment._
+    <Frame caption="Workflow Ready for Deployment" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/workflow-to-deploy.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 2. **Saving the Workflow**:  
-   Once the workflow has been run successfully, save the changes. An **API JSON file** is created along with the workflow file, which is required for deployment.  
-
-   _**Screenshot Suggestion**: Highlight the workflow save process and the creation of the API JSON file._
+   Once the workflow has been run successfully, save the changes. An **API JSON file** is created along with the workflow file, which is required for deployment. 
+   See the [Building Workflows](/get-started/build#2-building-workflows) document for more details.
 
 3. **Setting Up I/O Configurations**:
    - **I/O Configuration** is crucial for defining the workflow’s inputs and outputs, which will be used in API and Gradio UI deployments.
    - **Hover over the API JSON file** in the workflows list, click the **triple-dot menu**, and select **“I/O Configuration”**. A dialog box will appear showing two columns: **Inputs** and **Outputs**.
    
-   _**Screenshot Suggestion**: Show the API JSON file with the triple-dot menu and the I/O Configuration option._
+    <Frame caption="API JSON -> I/O Configuration" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/io-config-option.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
    - **Inputs**:  
      Select the input nodes from the dropdown. These inputs are derived from the nodes used in the workflow. Label each input, as this label will appear in the Gradio UI or API documentation.
    - **Outputs**:  
      Similarly, choose the output nodes and label them. Save the I/O configuration after completing this step.
 
-   _**Screenshot Suggestion**: Provide an image of the I/O Configuration dialog, showing the inputs and outputs being configured._
+    <Frame caption="Select input and output workflow nodes" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/io-1.png"
+          alt="Hero Dark"
+      />
+    </Frame>
+    <Frame caption="Select Input Parameters & Save" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/io-2.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ### **Testing the Workflow Before Deployment**
 - Before deploying the workflow, ensure it runs smoothly on the ComfyUI instance. Running it verifies that all nodes and models are properly configured and ready for deployment.
@@ -59,29 +83,72 @@ Deploying a workflow as an API on FlowScale enables scalable, serverless API end
 ### **Steps for Deploying a Workflow as an API**
 1. **Deploy the Workflow**:
    - Once the I/O configuration is complete, go to the top-right corner of the editor page and click **Deploy**.
+    <Frame caption="Deploy button" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/deploy-button.png"
+          alt="Hero Dark"
+      />
+    </Frame>
    - A dialog box will appear, showing a list of workflows in your project. Workflows with complete I/O configurations will have a **green checkmark**, while those without configurations will have a **red cross**.
    
-   _**Screenshot Suggestion**: Display the deployment dialog with workflows showing green checkmarks and red crosses._
+    <Frame caption="Deploy Workflows" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/deploy-modal.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 2. **Confirm Deployment**:
    - Select the workflows you wish to deploy and click **Deploy**. The system will take you to the **Deployment Tab** in the project settings, where you can track the status of the deployment.
    - **Loader Status**: This will display the current deployment status, such as preparing, deploying, and completed.
 
-   _**Screenshot Suggestion**: Show the Deployment Tab with the loading status for a workflow deployment._
+    <Frame caption="API Deployments Tab" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/deployment-tab.png"
+          alt="Hero Dark"
+      />
+    </Frame>
+    <Frame caption="Deploying Workflows" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/deploying.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ### **API Documentation (Swagger)**
 - After deployment, FlowScale generates API documentation using **Swagger**. This documentation includes details on how to call the API, endpoints, request/response formats, and authentication information.
 - You can access the **API Docs** by clicking the **API Docs** button in the deployment section.
 
-   _**Screenshot Suggestion**: Include a screenshot of the Swagger documentation with sample API endpoints listed._
+    <Frame caption="API Docs Link" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/api-docs-link.png"
+          alt="Hero Dark"
+      />
+    </Frame>
+    <Frame caption="API Docs" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/api-docs.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ### **Accessing API Endpoints and Usage Limits**
 - Once deployed, the API endpoints can be accessed via the **API Docs** section.
 - **Authentication**: API requests are authenticated using an **API Key**, which can be found in the **API Settings** under Project Settings. You can regenerate the key or disable authentication to make the API publicly accessible.
 
-   _**Screenshot Suggestion**: Show the API key management section in Project Settings._
-
-- **Usage Limits**: There are no predefined usage limits on the API, although FlowScale monitors the performance to ensure scalability.
+    <Frame caption="API Key" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/api-keys.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ---
 
@@ -97,15 +164,24 @@ Deploying a workflow as a Gradio UI creates a shareable interface that can be ac
    Once deployed, the Gradio UI link will appear in the **Gradio UI** section of the deployment page. This link can be shared with others, and they do not need to run ComfyUI on their machine to access the workflow.
    - **Public Links**: The generated Gradio UIs are publicly accessible, meaning you can share the URL with anyone to use the AI app.
 
-   _**Screenshot Suggestion**: Display the Gradio UI section with the generated links._
+    <Frame caption="Gradio URLs" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/gradio-links.png"
+          alt="Hero Dark"
+      />
+    </Frame>
+
+    <Frame caption="AI App (Gradio UI)" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/gradio-ui.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ### **Customizability of Gradio UIs**
 - Once a Gradio UI is deployed, its design and interface are determined by the **I/O configuration**. The interface is **not customizable** after deployment.
-  
-### **Embedding Gradio UIs**
-- At present, there is no functionality for **embedding Gradio UIs** into external websites or applications. The generated links function as standalone Gradio-based AI apps.
-
-   _**Screenshot Suggestion**: Add a note about the top bar of the Gradio UI showing GPU status and pending jobs._
 
 ---
 
@@ -114,18 +190,14 @@ Deploying a workflow as a Gradio UI creates a shareable interface that can be ac
 FlowScale workflows are designed to be scalable and handle multiple API requests efficiently.
 
 ### **Handling Scalability**
-- **Queue-based System**: FlowScale uses a **queue-based system** to handle multiple concurrent requests. When several users access the API at the same time, their requests are queued to ensure smooth execution without overwhelming the system.
+- **Queue-based System**: FlowScale uses ComfyUI's **queue-based system** to handle multiple concurrent requests. When several users access the API at the same time, their requests are queued to ensure smooth execution without overwhelming the system.
 
-   _**Screenshot Suggestion**: Show a queue-based system diagram or a simplified workflow of how requests are handled._
-
-### **Scaling Up or Down Based on Demand**
+### **Scaling Up or Down Based on Demand** (Coming Soon)
 - Currently, there is no manual functionality to scale workflows up or down based on demand. However, in the near future, FlowScale plans to introduce **auto-scaling features**. (This feature does not need to be included in the documentation for now.)
 
 ### **Optimizing Workflows for Better Performance**
 - **Minimize Node Complexity**: Keep the node list lightweight. The more nodes a workflow has, the **longer the cold start time** will be.
-- **Avoid Heavy Nodes**: Certain nodes (e.g., MixLab nodes) can significantly slow down the cold start time, potentially increasing it from 20 seconds to over two minutes. Use lightweight nodes whenever possible for faster workflow execution.
-
-   _**Screenshot Suggestion**: Provide a list of tips for optimizing workflows, such as limiting node complexity._
+- **Avoid Heavy Nodes**: Certain nodes (e.g., MixLab nodes) can significantly slow down the cold start time, potentially increasing it from 15 seconds to over two minutes. Use lightweight nodes whenever possible for faster workflow execution.
 
 ---
 
@@ -137,15 +209,27 @@ Once a workflow is deployed, it’s essential to monitor its performance and mak
 - **Deployment Logs**: You can view the deployment logs to check for errors, API usage statistics, and other relevant details.
 - To access the logs, go to the **Deployment Tab** and click **See Logs** next to the deployed workflow.
 
-   _**Screenshot Suggestion**: Show an image of the Deployment Tab with the “See Logs” button highlighted._
+    <Frame caption="See Deployment Logs" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/see-logs.png"
+          alt="Hero Dark"
+      />
+    </Frame>
 
 ### **Redeploying Workflows After Updates**
 - If you make changes to a workflow after it has been deployed, you can **redeploy** it:
   1. **Stop the Previous Deployment**: Go to the deployment section and stop the current deployment.
+    <Frame caption="See Current Deployment" style={{marginBottom: '10px'}}>
+      <img
+          className="block"
+          src="/images/deploy/stop-deployment.png"
+          alt="Hero Dark"
+      />
+    </Frame>
   2. **Reconfigure the Workflow**: Update the input/output settings of the new workflow version in the editor.
   3. **Deploy Again**: Click the **Deploy** button and follow the same steps to redeploy the workflow with the updated configuration.
 
-   _**Screenshot Suggestion**: Show the process of stopping and redeploying a workflow in the Deployment Tab._
 
 ---
 
