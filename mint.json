@@ -19,29 +19,23 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hello@flowscale.ai"
+      "url": "https://discord.gg/XgPTrNM7Du"
     }
   ],
   "topbarCtaButton": {
     "name": "Home",
     "url": "https://flowscale.ai"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
       "name": "Join Discord",
       "icon": "discord",
-      "url": "https://mintlify.com/community"
+      "url": "https://discord.gg/XgPTrNM7Du"
     },
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://flowscale.ai/blog"
     }
   ],
   "navigation": [
