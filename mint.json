@@ -48,11 +48,29 @@
         "get-started/manage",
         "get-started/deploy"
       ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/endpoint/health_check",
+        "api-reference/endpoint/get_queue",
+        "api-reference/endpoint/execute_workflow",
+        "api-reference/endpoint/get_execution_output",
+        "api-reference/endpoint/get_run_details",
+        "api-reference/endpoint/get_runs"
+      ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/flowscaleai",
+    "github": "https://github.com/FlowScale-AI/",
+    "linkedin": "https://www.linkedin.com/company/flowscaleai"
+  },
+  "api": {
+    "baseUrl": "https://YOUR_API_URL_PATH.pod.flowscale.ai",
+    "playground": {
+      "mode": "hide"
+    }
   }
 }
