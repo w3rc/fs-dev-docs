@@ -1,0 +1,328 @@
+---
+title: Training LoRAs on Flowscale
+description: This guide provides a comprehensive walkthrough on how to train LoRAs (Low-Rank Adaptations) using Flowscale. You'll learn how to deploy a ComfyUI workflow, set up necessary environment variables, and train your LoRA through an API. By the end of this tutorial, you'll have a trained LoRA uploaded to an AWS S3 bucket and accessible within your Flowscale environment.
+icon: "brush"
+---
+
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Attach the ComfyUI Workflow](#1-attach-the-comfyui-workflow)
+3. [Deploy the Workflow](#2-deploy-the-workflow)
+4. [Set Up AWS S3 Environment Variables](#3-set-up-aws-s3-environment-variables)
+5. [Train the LoRA via API](#4-train-the-lora-via-api)
+6. [Access and Use the Generated LoRA](#5-access-and-use-the-generated-lora)
+7. [Upcoming Features](#upcoming-features)
+8. [Troubleshooting](#troubleshooting)
+9. [Conclusion](#conclusion)
+
+---
+
+## Prerequisites
+
+- **Flowscale Account:** Ensure you have an active account on Flowscale.
+- **A Pod:** Ensure you have a properly configured pod in Flowscale
+- **Models:** Add models required to train the LoRA
+- **ComfyUI Workflow:** A starting workflow configured for LoRA training.
+- **AWS Account:** Access to AWS with permissions to manage S3 buckets and IAM users.
+- **AWS S3 Bucket:** A public S3 bucket where the LoRA will be stored.
+- **AWS Credentials:**
+  - `AWS_S3_BUCKET_NAME`
+  - `AWS_S3_ACCESS_KEY_ID`
+  - `AWS_S3_SECRET_ACCESS_KEY`
+  - `AWS_S3_REGION`
+
+---
+
+## 1. A Pod
+
+A pod is like a machine in Flowscale which hosts ComfyUI or ComfyUI APIs.
+   - Go To **Pods** Tab.
+   - Create a new *pod* or select an existing one
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+160524.png"/>
+
+
+## 2. Add models required in private volume to train the LoRA
+
+The models required for training LoRa are:
+
+1. flux1-dev-fp8.safetensors
+   - Download Link - https://huggingface.co/Kijai/flux-fp8/resolve/main/flux1-dev-fp8.safetensors
+   - Folder - unet
+2. t5xxl_fp8_e4m3fn.safetensors
+   - Download Link - https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors
+   - Folder - clip
+3. clip_l.safetensors
+   - Download Link - https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors
+   - Folder - clip
+4. ae.safetensors 
+   - Download Link - https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors
+   - Folder - vae
+
+### 2.1 Upload the models in private volume
+
+Create the folder
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+172145.png"/>
+Select the triple dot icon and click "Upload file"
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+172205.png"/>
+Fill the details and click "Confirm"
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+172235.png"/>
+
+## 3. Attach the ComfyUI Workflow
+
+Start by attaching your ComfyUI workflow to your Flowscale project.
+
+1. **Navigate to Your Project:**
+   - Log in to Flowscale and select your project.
+
+2. **Attach Workflow:**
+   - On the left navigation pane, add a new folder "LoraTraining" and import the following workflow.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+162906.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+145157.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+145209.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+145226.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+163328.png"/>
+
+---
+
+## 4. Set Up AWS S3 Environment Variables
+
+To store the generated LoRA, you need to configure AWS S3 environment variables.
+
+### a. Create or Use an Existing S3 Bucket
+
+1. **Access AWS S3:**
+   - Log in to your AWS Management Console.
+   - Navigate to **Services** > **S3**.
+
+2. **Create a Bucket:**
+   - Click on **Create bucket**.
+   - Enter a unique **Bucket name**.
+   - De-select "Block All Public Access"
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+165358.png"/>
+   - Scroll to bottom and click **Create bucket**.
+
+
+### b. Make the Bucket Public
+
+1. **Bucket Permissions:**
+   - Click on your bucket.
+   - Go to the **Permissions** tab.
+   - Set the following Bucket Policy
+   ```
+   {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::flowscale-development/*"
+        }
+      ]
+   }
+   ```
+   - Set the following Cross-origin-Resource-Sharing (CORS)
+   ```
+   [
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "PUT"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+      }
+   ]
+   ```
+
+
+> **Note:** Making the bucket public allows anyone to access its contents. Ensure it doesn't contain sensitive data.
+
+### c. Obtain AWS Credentials
+
+1. **Access IAM Service:**
+   - Navigate to **Services** > **IAM**.
+
+2. **Create a New User:**
+   - Click on **Users** > **Add users**.
+   - Enter a **User name**.
+   - Select **Programmatic access**.
+
+3. **Set Permissions:**
+   - Attach existing policies directly.
+   - Select **AmazonS3FullAccess** (for simplicity; for production, use more restrictive policies).
+
+4. **Retrieve Access Keys:**
+   - After creation, note down the **Access key ID** and **Secret access key**.
+
+
+### d. Add Environment Variables in Flowscale
+
+1. **Access Project Settings:**
+   - In Flowscale, go to your project.
+   - Click on **Settings** > **Environment Settings**
+
+2. **Add Environment Variables:**
+   - Add the following variables:
+
+     | Key                      | Value                   |
+     |--------------------------|-------------------------|
+     | `AWS_S3_BUCKET_NAME`     | *Your bucket name*      |
+     | `AWS_S3_ACCESS_KEY_ID`   | *Your Access Key ID*    |
+     | `AWS_S3_SECRET_ACCESS_KEY` | *Your Secret Access Key* |
+     | `AWS_S3_REGION`          | *Your AWS region*       |
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+165754.png"/>
+
+---
+
+
+## 5. Deploy the Workflow
+
+After the workflow is uploaded, click on "Deploy" to deploy it on a cloud GPU and expose API endpoints to execute the workflow.
+
+1. **Configure Workflow for API Deployment:**
+   - Configure the workflow for API Deployment
+   - On the left navigation pane, select the three dots icon beside API workflow
+   - Select the **SaveModelToFlowscaleVolume** Node and Click **Save Changes**
+   - Click on the **Deploy** button in your project dashboard.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+163816.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+163832.png"/>
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+163854.png"/>
+
+
+2. **Deploy the Workflow:**
+   - Click on "Deploy"
+   - Select the recently created/modified Pod and click "Deploy"
+   - Wait for the deployment process to complete.
+   - After the workflow is deployed, you will find the API URL, API Key, Workflow ID and Workflow Execution Parameters in the Active Deployment Dashboard.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+164922.png"/>
+
+---
+
+## 6. Train the LoRA via API
+
+With your workflow deployed and environment variables set, you can now train the LoRA.
+
+### a. Retrieve Your API Key
+
+1. **Access API Keys:**
+   - In your Flowscale project, go to **Deployment Dashboard** or **Project Settings**.
+   - Copy your **API URL** and **API Key**
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+164922.png"/>
+
+
+### b. Prepare Your API Request
+
+- **Endpoint URL:** Use the *API URL* provided after deployment.
+- **HTTP Method:** `POST`
+- **Headers:**
+  - `X-API-Key: YOUR_API_KEY`
+- **Form Data:**
+  - `images_lora_trainer`: Upload your images here.
+  - `lora_name`: The desired output LoRA name.
+
+### c. Example API Request Using cURL
+
+```bash
+curl --location 'https://your_api_url.pod.flowscale.ai/api/v1/runs?workflow_id=y0x7q1d6m3d&group_id=abcd' \
+--header 'X-API-Key: your_api_key' \
+--form 'images_lora_trainer=@/path/to/image1.jpg" \
+--form 'images_lora_trainer=@/path/to/image2.jpg" \
+--form 'images_lora_trainer=@/path/to/image3.jpg" \
+--form 'lora_name="test_lora_001"'
+```
+
+### d. Steps to Train
+
+1. **Collect Training Images:**
+   - Gather all images for training.
+
+2. **Execute API Request:**
+   - Use cURL or any API client (e.g., Postman) to send the request.
+   - The API will process the images and start training.
+   - Training time may vary based on image quantity and size.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+170505.png"/>
+
+---
+
+## 7. Access and Use the Generated LoRA
+
+### a. Verify LoRA in S3 Bucket
+
+1. **Check S3 Bucket:**
+   - Go to your AWS S3 bucket.
+   - Look for the newly generated LoRA file.
+
+2. You can also view the training details on the **Runs** Tab inside the project. You can view the training images and also download the trained model
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+170755.png"/>
+
+
+
+### b. Use LoRA in Flowscale Workflows
+
+1. **Access Flowscale Volume:**
+   - The LoRA is added to your Flowscale Private volume automatically.
+
+2. **Integrate LoRA into other workflows:**
+   - In your workflows, reference the LoRA by its name.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-10-27+171047.png"/>
+
+
+---
+
+## Upcoming Features
+
+- **Private Bucket Support:**
+  - Future updates will allow the use of private S3 buckets, enhancing security.
+  - Stay tuned for announcements regarding this feature.
+
+---
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+- **Invalid API Key:**
+  - Ensure you're using the correct API key from your project settings.
+
+- **S3 Access Denied:**
+  - Confirm that your bucket is public.
+  - Verify AWS credentials and permissions.
+
+- **LoRA Not Found:**
+  - Check if the training completed successfully.
+  - Look for error messages in the API response.
+
+- **Workflow Deployment Failed:**
+  - Review your ComfyUI workflow for errors.
+  - Ensure all required nodes and configurations are correct.
+
+---
+
+## Conclusion
+
+You've successfully trained a LoRA on Flowscale and made it available for use in your workflows. This process enables you to customize models efficiently, leveraging the power of Flowscale.
+
+---
+
+## Additional Resources
+
+- [Flowscale Documentation](https://docs.flowscale.ai)
+- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/index.html)
+
+---
